@@ -1,0 +1,14 @@
+#!/bin/sh
+OUTPUT_FILE=CHANGELOG.md
+
+# generate the changelog
+if [ -e .commit ] 
+then
+	rm .commit
+else
+	node ./node_modules/changelog-generator/generate-changelog.js
+	git add $OUTPUT_FILE
+	touch .commit
+	git commit --amend
+fi
+
